@@ -19,7 +19,7 @@ The website includes:
 - **About** — professional background and engineering approach.
 - **Technical expertise** — contact-centre technology, site reliability, software engineering, infrastructure and delivery.
 - **Selected projects** — Expense Tracker, Customer Management System and Cargo Tracking.
-- **Professional journey** — experience in Product Technology / SRE and ongoing graduate studies through Georgia Tech's Online Master of Science in Computer Science (OMSCS).
+- **Professional journey** — professional experience in enterprise technology delivery, reliability and production operations.
 
 ## Technical areas
 
