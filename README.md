@@ -14,7 +14,7 @@ The site brings together my work in enterprise contact-centre technology, servic
 
 - **About:** My approach to production troubleshooting, engineering and product building.
 - **Expertise:** Site reliability and operations, cloud and DevOps foundations, contact-centre technology, and full-stack software engineering.
-- **Selected projects:** Expense Tracker, Customer Management System, and Texmon Logistics.
+- **Selected projects:** Expense Tracker, Customer Management System, and Cargo Tracking.
 - **Professional journey:** Product Technology Engineer / SRE experience and ongoing OMSCS studies at Georgia Tech.
 
 ## Technology and areas of work
