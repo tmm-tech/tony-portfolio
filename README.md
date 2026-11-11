@@ -1,32 +1,49 @@
 # Tony Mwangi Mugi — Engineering Portfolio
 
-Personal portfolio website for **Tony Mwangi Mugi**, a Product Technology Engineer / Site Reliability Engineer based in Nairobi, Kenya.
+Personal portfolio website for **Tony Mwangi Mugi**, a Nairobi-based Product Technology Engineer / Site Reliability Engineer (SRE).
 
-The site brings together my work in enterprise contact-centre technology, service reliability, software engineering, and ongoing technical development.
+The portfolio highlights my experience supporting enterprise contact-centre platforms, improving service reliability, troubleshooting production systems, and building software products.
 
-## Live website
+## Live portfolio
 
-- **Portfolio:** https://tony-portfolio-github.vercel.app
-- **GitHub:** https://github.com/tmm-tech
-- **LinkedIn:** https://www.linkedin.com/in/tony-mwangi-mugi-392361193
+**[tonymwangi.vercel.app](https://tonymwangi.vercel.app)**
 
-## What you'll find here
+- **GitHub:** [github.com/tmm-tech](https://github.com/tmm-tech)
+- **LinkedIn:** [linkedin.com/in/tony-mwangi-mugi-392361193](https://www.linkedin.com/in/tony-mwangi-mugi-392361193)
+- **Source code:** [tony-portfolio](https://github.com/tmm-tech/tony-portfolio)
 
-- **About:** My approach to production troubleshooting, engineering and product building.
-- **Expertise:** Site reliability and operations, cloud and DevOps foundations, contact-centre technology, and full-stack software engineering.
-- **Selected projects:** Expense Tracker, Customer Management System, and Cargo Tracking.
-- **Professional journey:** Product Technology Engineer / SRE experience and ongoing OMSCS studies at Georgia Tech.
+## Portfolio overview
 
-## Technology and areas of work
+The website includes:
 
-Depending on the project, my work includes:
+- **About** — professional background and engineering approach.
+- **Technical expertise** — contact-centre technology, site reliability, software engineering, infrastructure and delivery.
+- **Selected projects** — Expense Tracker, Customer Management System and Cargo Tracking.
+- **Professional journey** — experience in Product Technology / SRE and ongoing graduate studies through Georgia Tech's Online Master of Science in Computer Science (OMSCS).
 
-- **Contact-centre systems:** AICC, IVR, call routing, SIP, SBCs and WebRTC.
-- **Software:** JavaScript, React, Vue, Node.js and PostgreSQL.
-- **Infrastructure and delivery:** Linux, Docker, Kubernetes and CI/CD.
-- **Application security:** Secure handling of sensitive financial data, including encryption.
+## Technical areas
 
-## Project structure
+The portfolio reflects practical experience and ongoing development across the following areas:
+
+| Area | Technologies and focus |
+|---|---|
+| Contact-centre technology | AICC, IVR, call routing, SIP, Session Border Controllers (SBCs), WebRTC |
+| Software engineering | JavaScript, React, Vue.js, Node.js, PostgreSQL |
+| Infrastructure and operations | Linux, Docker, Kubernetes, CI/CD, production troubleshooting |
+| Application security | Financial-data protection, encryption and secure application design |
+
+## Featured projects
+
+### Expense Tracker
+A personal finance application under active development, with a focus on secure financial-data handling and investment tracking.
+
+### Customer Management System
+A software project focused on customer information and management workflows.
+
+### Cargo Tracking
+A logistics-oriented project for tracking cargo and related shipment information.
+
+## Repository structure
 
 ```text
 .
@@ -39,22 +56,24 @@ Depending on the project, my work includes:
 
 ## Run locally
 
-This is a static website; no build step or package installation is required.
+This is a static website. It does not require a build step or package installation.
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/tmm-tech/tony-portfolio.git
    cd tony-portfolio
    ```
-2. Open `index.html` in a browser, or serve the folder with any static HTTP server.
+
+2. Open `index.html` in a browser, or start any static HTTP server from the project directory.
 
 ## Deployment
 
-The repository is connected to Vercel. The production deployment is configured to use the `main` branch; pushes to that branch are intended to trigger a new deployment.
+The portfolio is deployed on **Vercel** and connected to this GitHub repository. The production branch is `main`; changes pushed to that branch are intended to trigger a deployment.
 
-## Notes
+## Project status
 
-Project descriptions are intentionally concise. The Expense Tracker is an ongoing project and is labelled as in development on the site.
+The portfolio is a continuously evolving representation of my engineering experience, projects and learning journey. The Expense Tracker is still in development and is presented as such on the website.
 
 ---
 
