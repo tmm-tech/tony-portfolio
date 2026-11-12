@@ -54,13 +54,119 @@ footer{padding:27px 0;border-top:1px solid var(--line);color:var(--soft);font:10
 <section class="section" id="contact"><div class="wrap"><div class="contact-panel reveal"><div><div class="kicker">05 / CONTACT</div><h2>Have a problem<br>worth solving?</h2><p>I’m always glad to connect about software engineering, platform reliability, infrastructure, technology projects and opportunities where thoughtful problem-solving and dependable delivery matter.</p></div><div class="contact-links"><a href="https://github.com/tmm-tech" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/tony-mwangi-mugi-392361193" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div><form class="contact-form" id="contact-form"><label>Name<input name="name" autocomplete="name" maxlength="100" required placeholder="Your name"></label><label>Email address<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com"></label><label class="full">Subject<input name="subject" maxlength="150" required placeholder="What would you like to discuss?"></label><label class="full">Message<textarea name="message" maxlength="5000" required placeholder="Write your message..."></textarea></label><div class="hp-field" aria-hidden="true"><label>Leave this field empty<input name="website" tabindex="-1" autocomplete="off"></label></div><div class="full"><button class="btn" type="submit" id="contact-submit">Send message ↗</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p></div></form></div></div></section>
 </main><footer><div class="wrap footer-inner"><span>© <span id="year"></span> TONY MWANGI MUGI</span><span>BUILT WITH CURIOSITY · NAIROBI, KENYA</span></div></footer>
 <script>
-const contactForm=document.getElementById('contact-form');if(contactForm){contactForm.addEventListener('submit',async event=>{event.preventDefault();const submit=document.getElementById('contact-submit'),status=document.getElementById('form-status');submit.disabled=true;submit.textContent='Sending…';status.className='form-status';status.textContent='Sending your message securely…';try{const payload=Object.fromEntries(new FormData(contactForm).entries());const response=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.error||'Your message could not be sent. Please try again.');contactForm.reset();status.className='form-status success';status.textContent='Thank you — your message has been sent.'}catch(error){status.className='form-status error';status.textContent=error.message||'Something went wrong. Please try again.'}finally{submit.disabled=false;submit.textContent='Send message ↗'}})};\nconst year=document.getElementById('year');year.textContent=new Date().getFullYear();
-const menu=document.getElementById('menu-toggle'),nav=document.getElementById('site-nav');
-menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation');menu.textContent=open?'×':'☰'});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰'}));
-const theme=document.getElementById('theme-toggle');theme.addEventListener('click',()=>{document.body.classList.toggle('light');const light=document.body.classList.contains('light');theme.textContent=light?'☾':'☼';theme.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');document.querySelector('meta[name="theme-color"]').content=light?'#f4f7fb':'#080e1c'});
-const progress=document.getElementById('progress');const updateProgress=()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?scrollY/max*100:0)+'%'};addEventListener('scroll',updateProgress,{passive:true});updateProgress();
-const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
-const sections=[...document.querySelectorAll('main section[id]')],links=[...nav.querySelectorAll('a')];const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+entry.target.id))}}),{rootMargin:'-35% 0px -55% 0px'});sections.forEach(section=>sectionObserver.observe(section));
+(function () {
+  'use strict';
+  const init = function () {
+    const menuButton = document.getElementById('menu-toggle');
+    const nav = document.getElementById('site-nav');
+    const themeButton = document.getElementById('theme-toggle');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    if (menuButton && nav) {
+      menuButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const isOpen = nav.classList.toggle('open');
+        menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+        menuButton.textContent = isOpen ? '×' : '☰';
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('open');
+          menuButton.setAttribute('aria-expanded', 'false');
+          menuButton.setAttribute('aria-label', 'Open navigation');
+          menuButton.textContent = '☰';
+        });
+      });
+    }
+
+    if (themeButton) {
+      themeButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const isLight = document.body.classList.toggle('light');
+        themeButton.textContent = isLight ? '☾' : '☼';
+        themeButton.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+        if (themeMeta) themeMeta.setAttribute('content', isLight ? '#f4f7fb' : '#080e1c');
+      });
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const submit = document.getElementById('contact-submit');
+        const status = document.getElementById('form-status');
+        submit.disabled = true;
+        submit.textContent = 'Sending…';
+        status.className = 'form-status';
+        status.textContent = 'Sending your message securely…';
+        try {
+          const payload = Object.fromEntries(new FormData(contactForm).entries());
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json().catch(function () { return {}; });
+          if (!response.ok) throw new Error(result.error || 'Your message could not be sent. Please try again.');
+          contactForm.reset();
+          status.className = 'form-status success';
+          status.textContent = 'Thank you — your message has been sent.';
+        } catch (error) {
+          status.className = 'form-status error';
+          status.textContent = error.message || 'Something went wrong. Please try again.';
+        } finally {
+          submit.disabled = false;
+          submit.textContent = 'Send message ↗';
+        }
+      });
+    }
+
+    const year = document.getElementById('year');
+    if (year) year.textContent = new Date().getFullYear();
+
+    const progress = document.getElementById('progress');
+    const updateProgress = function () {
+      if (!progress) return;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? window.scrollY / max * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function (element) {
+        revealObserver.observe(element);
+      });
+
+      const sections = Array.from(document.querySelectorAll('main section[id]'));
+      const links = Array.from((nav || document.createElement('nav')).querySelectorAll('a'));
+      const sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            links.forEach(function (link) {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+            });
+          }
+        });
+      }, { rootMargin: '-35% 0px -55% 0px' });
+      sections.forEach(function (section) { sectionObserver.observe(section); });
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
 </script>
 </body></html>
